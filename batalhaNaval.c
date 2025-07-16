@@ -5,36 +5,66 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    int i, j;
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+    // Matriz 5x5 para Habilidade CONE
+    int cone[5][5] = {0};
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+    // Preenchendo CONE (padrão pirâmide invertida)
+    for (i = 0; i < 3; i++) {                // 3 linhas preenchidas
+        for (j = 2 - i; j <= 2 + i; j++) {  // colunas centrais se expandem
+            cone[i][j] = 1;
+        }
+    }
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
+    // Matriz 5x5 para Habilidade CRUZ
+    int cruz[5][5] = {0};
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
+    // Preenchendo CRUZ (linha e coluna do meio)
+    for (i = 0; i < 5; i++) {
+        cruz[2][i] = 1; // linha central inteira
+        cruz[i][2] = 1; // coluna central inteira
+    }
+
+    // Matriz 5x5 para Habilidade OCTAEDRO
+    int octaedro[5][5] = {0};
+
+    // Preenchendo OCTAEDRO (losango)
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            // A distância de Manhattan do centro é 2
+            if ((i - 2 < 0 ? 2 - i : i - 2) + (j - 2 < 0 ? 2 - j : j - 2) == 2) {
+                octaedro[i][j] = 1;
+            }
+        }
+    }
+
+    // Exibindo padrão CONE
+    printf("Habilidade CONE:\n");
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            printf("%d ", cone[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Exibindo padrão CRUZ
+    printf("\nHabilidade CRUZ:\n");
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            printf("%d ", cruz[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Exibindo padrão OCTAEDRO
+    printf("\nHabilidade OCTAEDRO:\n");
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            printf("%d ", octaedro[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
